@@ -1,0 +1,40 @@
+# Docker-compose version
+version: "3" 
+
+# Services/Containers to be run
+services: 
+  # Name of the first service/container
+  front:
+    image: "sb/articles-fe:${BUILD_ENV}"
+    build: 
+      context: .
+      target: "${BUILD_ENV}"
+      dockerfile: Dockerfile.client
+    volumes:
+      - ./apps/articles-chrono/src:/apps/articles-chrono/src
+    ports:
+      - 4200:4200
+    command: npm run start:client
+  # Name of the second service/container
+  api:
+    image: "sb/articles-api:${BUILD_ENV}"
+    build: 
+      context: .
+      target: "${BUILD_ENV}"
+      dockerfile: Dockerfile.api
+    volumes:
+      - ./apps/api/src:/apps/api/src
+    ports:
+      - 3333:3333
+    links:
+      - mongodb
+    command: npm run start:api
+  # Name of the third service/container
+  mongodb: 
+    image: mongo:latest
+    environment: 
+      - MONGODB_DATABASE="nest"
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - 27017:27017

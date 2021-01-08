@@ -96,3 +96,20 @@ Nx Cloud pairs with Nx in order to enable you to build and test code more rapidl
 Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
 
 Visit [Nx Cloud](https://nx.app/) to learn more.
+
+
+# Articles Chronology Monorepo
+
+Fullstack app
+
+## Para levantar Client app en 'Development':
+
+BUILD_ENV=development docker-compose up --build
+
+https://localhost:4200
+
+## Para pushear imagen a dockerhub:
+
+BUILD_ENV=development docker-compose build
+docker push sb/articles-fe:develop && sb/articles-api:develop
+
