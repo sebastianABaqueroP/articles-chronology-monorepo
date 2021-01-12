@@ -1,15 +1,14 @@
 # Docker-compose version
-version: "3" 
-
+version: '3.6'
 # Services/Containers to be run
 services: 
   # Name of the first service/container
   front:
-    image: "sb/articles-fe:${BUILD_ENV}"
+    image: "articles-fe-${BUILD_ENV}"
     build: 
       context: .
       target: "${BUILD_ENV}"
-      dockerfile: Dockerfile.client
+      dockerfile: ./client-image/
     volumes:
       - ./apps/articles-chrono/src:/apps/articles-chrono/src
     ports:
@@ -21,7 +20,7 @@ services:
     build: 
       context: .
       target: "${BUILD_ENV}"
-      dockerfile: Dockerfile.api
+      dockerfile: ./api-image/
     volumes:
       - ./apps/api/src:/apps/api/src
     ports:
